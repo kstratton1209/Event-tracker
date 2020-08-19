@@ -49,6 +49,10 @@
 										<c:if test="${!ev.isAttending(user.id)}">
 										  	<a href="/events/${ev.id}/join">Join</a>
 										</c:if> 
+										<c:if test="${ev.isAttending(user.id)}">
+										  	<a href="/events/${ev.id}/cancel">Cancel</a>
+										</c:if> 
+										
 
 			                        	<c:if test="${ev.user.id == user.id}">            
 			                        		<a href="/events/${ev.id}/edit">Edit</a>

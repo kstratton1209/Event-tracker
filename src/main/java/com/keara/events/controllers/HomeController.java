@@ -152,5 +152,22 @@ public class HomeController {
         }
     }
 	
+	@GetMapping("/events/{id}/cancel")
+	public String cancelJoin(@PathVariable("id") Long id, HttpSession session, Model model) {
+		User userFromSession = (User) session.getAttribute("user");
+		if(userFromSession == null) {
+			return "redirect:/";
+		}
+		Event toCancel = eServ.getOne(id);
+		List<User> attendees = toCancel.getAttendees();
+		attendees.remove(userFromSession);
+		toCancel.setAttendees(attendees);
+		eServ.update(toCancel);
+		return "redirect:/home";
+	}
+	
+	
+	
+	
 	
 }
